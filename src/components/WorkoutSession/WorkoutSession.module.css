@@ -83,7 +83,7 @@
 }
 
 .sets {
-  background-color: #adff00;
+  background-color: #668d11;
   padding-inline: 1rem;
   border-radius: 1rem;
 }
@@ -100,7 +100,8 @@
 }
 
 .next {
-  background-color: #adff00 !important;
+  color: antiquewhite;
+  background-color: #104c8d !important;
 }
 
 .modal {

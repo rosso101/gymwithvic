@@ -8,6 +8,7 @@
 }
 
 body {
+  background-color: rgb(119, 186, 186);
   position: relative;
   min-height: 98vh;
 

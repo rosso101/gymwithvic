@@ -17,6 +17,13 @@ export default function App() {
   const history = useSelector((state) => state.workout_history);
   const [view, setView] = useState("Home");
 
+  // Debugging: Log the current state whenever it changes
+  useEffect(() => {
+    console.log("Current Library:", library);
+    console.log("Current History:", history);
+  }, [library, history]);
+
+  // Load data from localStorage on initial render
   useEffect(() => {
     const lcLibKey = "circuit.LIBRARY_STORAGE";
     const lcHisKey = "circuit.HISTORY_STORAGE";
@@ -30,12 +37,14 @@ export default function App() {
     if (storedHistory !== null) {
       dispatch({ type: "UPDATE_HISTORY", payload: storedHistory });
     }
-  }, []);
+  }, [dispatch]);
 
+  // Save library to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem("circuit.LIBRARY_STORAGE", JSON.stringify(library));
   }, [library]);
 
+  // Save history to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem("circuit.HISTORY_STORAGE", JSON.stringify(history));
   }, [history]);
@@ -45,6 +54,7 @@ export default function App() {
       {view.substring(0, 3) !== "wss" && (
         <FloatingButtons changeView={(view) => setView(view)} />
       )}
+
       <div className="container">
         {view === "Home" && (
           <Home
@@ -94,7 +104,6 @@ export default function App() {
             }}
           />
         )}
-
         {view.substring(0, 3) === "wss" && (
           <WorkoutSession
             changeView={(view) => {
@@ -103,7 +112,6 @@ export default function App() {
             workoutId={view.substring(3)}
           />
         )}
-
         {view.substring(0, 3) === "sta" && (
           <WorkoutStats workoutId={view.substring(3)} />
         )}

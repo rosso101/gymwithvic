@@ -24,7 +24,7 @@
   font-weight: 500;
   display: flex;
 
-  background-color: #ADFF00;
+  background-color: #c9660a;
 
   padding: 1rem;
   border-radius: 0.5rem;
@@ -42,5 +42,5 @@
 }
 
 .libButton {
-  background-color: white !important;
+  background-color: rgb(170, 133, 133) !important;
 }
