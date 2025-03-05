@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import styles from "./WorkoutSession.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "../UI/Modal";
@@ -12,6 +11,7 @@ const WorkoutSession = (props) => {
   const [sets, setSets] = useState(1);
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [isRunning, setIsRunning] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -32,10 +32,6 @@ const WorkoutSession = (props) => {
   const handleEndWorkout = () => {
     handleStopwatch();
     props.changeView("Home");
-    // const day = new Date().getDate();
-    // const month = new Date().getMonth() + 1;
-    // const year = new Date().getFullYear();
-
     const data = {
       id: crypto.randomUUID(),
       workoutId: props.workoutId,
@@ -47,7 +43,6 @@ const WorkoutSession = (props) => {
     };
 
     dispatch({ type: "ADD_WORKOUT_TO_HISTORY", payload: data });
-
   };
 
   const formatTime = (time) => {
@@ -57,6 +52,14 @@ const WorkoutSession = (props) => {
     return `${hours}:${minutes < 10 ? "0" + minutes : minutes}:${
       seconds < 10 ? "0" + seconds : seconds
     }`;
+  };
+
+  const Popup = ({ message, onClose }) => {
+    return (
+      <div className={styles.popup}>
+        <p>{message}</p>
+      </div>
+    );
   };
 
   return (
@@ -79,6 +82,8 @@ const WorkoutSession = (props) => {
           </div>
         </Modal>
       )}
+
+      {showPopup && <Popup message="You're doing great, keep it up!" />}
 
       <div className={styles.filler}></div>
       <h1>Workout</h1>
@@ -111,6 +116,10 @@ const WorkoutSession = (props) => {
         className={styles.next}
         onClick={() => {
           setSets((prev) => prev + 1);
+          setShowPopup(true);
+          setTimeout(() => {
+            setShowPopup(false);
+          }, 2000); // Hide the popup after 2 seconds
         }}
       >
         Next Set

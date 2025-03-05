@@ -19,6 +19,8 @@ body::before {
   background-repeat: no-repeat;
   opacity: 0.5; /* Adjust opacity (0.5 = 50% opacity) */
   z-index: -1; /* Place it behind the content */
+  padding-bottom: 18rem;
+  padding-top: 2rem;
 }
 .floatingB {
   position: fixed;
