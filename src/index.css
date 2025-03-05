@@ -6,16 +6,20 @@
   padding: 0;
   margin: 0;
 }
-
-body {
-  background-color: rgb(119, 186, 186);
-  position: relative;
-  min-height: 98vh;
-
-  padding-bottom: 10rem;
-  padding-top: 2rem;
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("gymrat.jpg"); /* Background image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.5; /* Adjust opacity (0.5 = 50% opacity) */
+  z-index: -1; /* Place it behind the content */
 }
-
 .floatingB {
   position: fixed;
   display: flex;
@@ -31,8 +35,6 @@ body {
 .floatingB button {
   width: 4rem;
   height: 4rem;
-  /* text-align: center;
-  line-height: 50px; */
   display: flex;
   align-items: center;
   justify-content: center;
